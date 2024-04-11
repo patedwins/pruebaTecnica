@@ -7,7 +7,6 @@
 
 package com.pichincha.controller;
 
-import com.pichincha.api.service.exception.util.MessageProcessorUtil;
 import com.pichincha.postgres.entity.EntidadEntity;
 import com.pichincha.service.IEntidadService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -33,18 +32,15 @@ import java.util.List;
 public class EntidadController {
 
     private final transient IEntidadService entidadService;
-    private final transient MessageProcessorUtil messageProcessor;
 
     /**
      * Controller
      *
      * @param entidadService
-     * @param messageProcessor
      */
 
-    public EntidadController(IEntidadService entidadService, MessageProcessorUtil messageProcessor) {
+    public EntidadController(IEntidadService entidadService) {
         this.entidadService = entidadService;
-        this.messageProcessor = messageProcessor;
     }
 
     /**

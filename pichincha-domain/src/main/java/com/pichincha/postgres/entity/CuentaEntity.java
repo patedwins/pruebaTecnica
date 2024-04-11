@@ -33,7 +33,7 @@ public class CuentaEntity {
     private EntidadEntity entidad;
 
     @Column(name = "num_cuenta", nullable = false, length = 50)
-    private String num_cuenta;
+    private String numCuenta;
 
     @Column(name = "tipo", nullable = false, length = 30)
     private String tipo;
