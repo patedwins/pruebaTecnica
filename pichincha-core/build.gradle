@@ -1,12 +1,9 @@
 dependencies {
     implementation project(':pichincha-domain')
     implementation 'ec.gob.seps.utils:seps-core-util:1.1.0-SNAPSHOT'
-    implementation group:'ec.gob.seps.utils', name:'seps-spring-web-util', version: '1.0.0-SNAPSHOT'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.3'
     implementation 'org.springframework.security:spring-security-core:5.5.2'
 
-    implementation 'ec.gob.seps.utils:seps-core-util:1.1.0-SNAPSHOT'
-    implementation 'ec.gob.seps.utils:seps-spring-web-util:1.0.1-SNAPSHOT'
     implementation 'org.springframework:spring-web:5.3.22'
 
     implementation 'io.jsonwebtoken:jjwt:0.9.1'

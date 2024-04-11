@@ -1,8 +1,0 @@
-# Execute gitlab construction to sprin boot project
-
-# Author = Patricio Peñaloza
-
-# Maintainer = patedwins@gmail.com
-
-include:
-  - remote: 'https://gitlab.seps.gob.ec/admincicd/seps-gitlab-runner-pipeline-shared-lib/-/raw/master/java/.springBootServicePipelineV2.yml'

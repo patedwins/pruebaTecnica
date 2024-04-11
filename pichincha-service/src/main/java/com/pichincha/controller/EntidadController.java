@@ -10,7 +10,6 @@ package com.pichincha.controller;
 import com.pichincha.api.service.exception.util.MessageProcessorUtil;
 import com.pichincha.postgres.entity.EntidadEntity;
 import com.pichincha.service.IEntidadService;
-import ec.gob.ec.core.util.rest.EndPointPrefix;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,7 +52,7 @@ public class EntidadController {
      *
      * @return a @{@link EntidadEntity} list.
      */
-    @GetMapping(value = EndPointPrefix.obtenerLista + "Cuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "obtenerListaCuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
     public List<EntidadEntity> findAll() {
         return entidadService.findAll();

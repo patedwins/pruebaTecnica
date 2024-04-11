@@ -12,7 +12,6 @@ dependencies {
     implementation project(':pichincha-domain')
     implementation project(':pichincha-core')
 
-    implementation 'ec.gob.seps.utils:seps-core-util:1.1.0-SNAPSHOT'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
