@@ -3,7 +3,7 @@ package com.pichincha.service.security;
 /**
  * IAuthenticationFacade.
  *
- * @author cfreire on 2022/09/08.
+ * @author patedwins on 2024/04/12.
  * @version 1.0.0
  */
 public interface IAuthenticationFacade {

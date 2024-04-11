@@ -17,7 +17,7 @@ import java.util.function.Function;
 /**
  * Componente que nos permite encriptar y desencriptar un token JWT.
  *
- * @author cfreire on 2022/09/08.
+ * @author patedwins on 2024/04/12.
  * @version 1.0.0
  */
 @Getter

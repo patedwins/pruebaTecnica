@@ -7,9 +7,10 @@
 
 package com.pichincha.controller;
 
-import com.pichincha.api.service.IEntidadService;
+import com.pichincha.api.service.ICuentaService;
 import com.pichincha.api.service.exception.util.MensajeConstantes;
-import com.pichincha.postgres.entity.EntidadEntity;
+import com.pichincha.postgres.entity.CuentaEntity;
+import com.pichincha.vo.CuentaVo;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,39 +40,39 @@ import java.util.List;
 @SecurityRequirement(name = "Bearer")
 public class CuentaController {
 
-    private final transient IEntidadService entidadService;
+    private final transient ICuentaService cuentaService;
 
     /**
      * Controller
      *
-     * @param entidadService
+     * @param cuentaService
      */
 
-    public CuentaController(IEntidadService entidadService) {
-        this.entidadService = entidadService;
+    public CuentaController(ICuentaService cuentaService) {
+        this.cuentaService = cuentaService;
     }
 
     /**
      * Find all entidad.
      *
-     * @return a @{@link EntidadEntity} list.
+     * @return a @{@link CuentaEntity} list.
      */
     @GetMapping(value = "obtenerListaCuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<EntidadEntity> findAll() {
-        return entidadService.findAll();
+    public List<CuentaEntity> findAll() {
+        return cuentaService.findAll();
     }
 
     /**
      * New Entidad.
      *
-     * @return a @{@link EntidadEntity} string.
+     * @return a @{@link CuentaEntity} string.
      */
     @PostMapping(value = "nuevaEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> newEntity(@RequestBody EntidadEntity data, HttpServletRequest request) {
+    public ResponseEntity<String> newEntity(@RequestBody CuentaVo data, HttpServletRequest request) {
         try {
-            String respons = entidadService.saveNewEntidad(data);
+            String respons = cuentaService.saveNewCuenta(data);
             if (respons == null) {
                 return new ResponseEntity<>(MensajeConstantes.SAVE_NEW, HttpStatus.OK);
             } else {
@@ -86,13 +87,13 @@ public class CuentaController {
     /**
      * Update Entidad.
      *
-     * @return a @{@link EntidadEntity} string.
+     * @return a @{@link CuentaEntity} string.
      */
     @PutMapping(value = "actualizarEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> updateEntidad(@RequestBody EntidadEntity data, HttpServletRequest request) {
+    public ResponseEntity<String> updateEntidad(@RequestBody CuentaVo data, HttpServletRequest request) {
         try {
-            String respons = entidadService.updateEntidad(data);
+            String respons = cuentaService.updateCuenta(data);
             if (respons == null) {
                 return new ResponseEntity<>(MensajeConstantes.SAVE_UPDATE, HttpStatus.OK);
             } else {
@@ -107,13 +108,13 @@ public class CuentaController {
     /**
      * Delete Entidad.
      *
-     * @return a @{@link EntidadEntity} string.
+     * @return a @{@link CuentaEntity} string.
      */
     @DeleteMapping(value = "eliminarEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> deleteEntidad(@RequestBody EntidadEntity data, HttpServletRequest request) {
+    public ResponseEntity<String> deleteEntidad(@RequestBody CuentaVo data, HttpServletRequest request) {
         try {
-            String respons = entidadService.deleteEntidad(data);
+            String respons = cuentaService.deleteCuenta(data);
             if (respons == null) {
                 return new ResponseEntity<>(MensajeConstantes.DELETE, HttpStatus.OK);
             } else {

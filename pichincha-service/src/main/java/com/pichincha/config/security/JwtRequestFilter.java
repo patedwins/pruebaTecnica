@@ -22,7 +22,7 @@ import java.io.IOException;
  * Filtro para interceptar cada peticion del cliente, y asegurarse que todas las
  * llamadas tengan un token v&aacute;lido
  *
- * @author cfreire on 2022/09/08.
+ * @author patedwins on 2024/04/12.
  * @version 1.0.0
  */
 @Component

@@ -17,7 +17,7 @@ import java.io.Serializable;
 /**
  * WebSecurityConfig.
  *
- * @author cfreire on 2022/09/08.
+ * @author patedwins on 2024/04/12.
  * @version 1.0.0
  */
 @Configuration
@@ -48,7 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements S
         httpSecurity.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/authenticate", "/actuator/**", "/transaccion/**",
-                  "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/cuenta/**",
+                        "/entidad/**").permitAll()
 
                 // Se debe agregar aqui el path de aquellos servicios que se desea que sean públicos.
                 // Ejemplo:
