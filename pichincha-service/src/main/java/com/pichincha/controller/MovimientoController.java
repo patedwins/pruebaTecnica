@@ -26,10 +26,10 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/entidad")
+@RequestMapping("/movimiento")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @SecurityRequirement(name = "Bearer")
-public class EntidadController {
+public class MovimientoController {
 
     private final transient IEntidadService entidadService;
 
@@ -39,7 +39,7 @@ public class EntidadController {
      * @param entidadService
      */
 
-    public EntidadController(IEntidadService entidadService) {
+    public MovimientoController(IEntidadService entidadService) {
         this.entidadService = entidadService;
     }
 

@@ -7,6 +7,7 @@
 
 package com.pichincha.postgres.repository;
 
+import com.pichincha.postgres.entity.CuentaEntity;
 import com.pichincha.postgres.entity.EntidadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,6 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
-public interface IEntidadRepository extends JpaRepository<EntidadEntity, Integer> {
+public interface ICuentaRepository extends JpaRepository<CuentaEntity, Integer> {
 
 }

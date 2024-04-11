@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * Utility for handling messages.
  *
- * @author cfreire on 2022/09/16.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
 @Component

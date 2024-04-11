@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Catálogo entity.
@@ -36,4 +40,11 @@ public class MovimientoEntity {
 
     @Column(name = "desc_movimiento", nullable = true, length = 150)
     private String descripcion;
+
+    @Column(name = "fec_movimiento")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecMovimiento;
+
+    @Column(name = "valor")
+    private BigDecimal valor;
 }
