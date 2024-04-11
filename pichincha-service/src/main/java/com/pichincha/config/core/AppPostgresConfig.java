@@ -21,7 +21,7 @@ import java.io.Serializable;
 /**
  * AppPostgresConfig to run spring boot app.
  *
- * @author cfreire on 2022/08/23.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
 @Configuration

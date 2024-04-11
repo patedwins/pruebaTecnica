@@ -7,12 +7,22 @@
 
 package com.pichincha.service;
 
+import com.pichincha.postgres.entity.EntidadEntity;
+
+import java.util.List;
+
 /**
  * Base catálogo service interfaz.
  *
  * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
-public interface IBaseCatalogoService {
+public interface IEntidadService {
 
+    /**
+     * Find all group catalogs.
+     *
+     * @return a @{@link EntidadEntity} list.
+     */
+    List<EntidadEntity> findAll();
 }

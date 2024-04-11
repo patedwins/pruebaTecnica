@@ -3,7 +3,7 @@ package com.pichincha.util;
 /**
  * Api externo constantes
  *
- * @author cfreire on 2022/08/23.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
 public class APIExterno {

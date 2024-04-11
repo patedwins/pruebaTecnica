@@ -6,10 +6,10 @@ import org.springframework.web.server.ResponseStatusException;
 /**
  * Exception management
  *
- * @author cfreire on 2022/09/16.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
-public class SepsException extends ResponseStatusException {
+public class PichinchaException extends ResponseStatusException {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class SepsException extends ResponseStatusException {
      *
      * @param status the HTTP status (required)
      */
-    public SepsException(HttpStatus status) {
+    public PichinchaException(HttpStatus status) {
         super(status);
     }
 
@@ -29,7 +29,7 @@ public class SepsException extends ResponseStatusException {
      * @param status the HTTP status (required)
      * @param reason the associated reason (optional)
      */
-    public SepsException(HttpStatus status, String reason) {
+    public PichinchaException(HttpStatus status, String reason) {
         super(status, reason);
     }
 
@@ -41,7 +41,7 @@ public class SepsException extends ResponseStatusException {
      * @param reason the associated reason (optional)
      * @param cause  a nested exception (optional)
      */
-    public SepsException(HttpStatus status, String reason, Throwable cause) {
+    public PichinchaException(HttpStatus status, String reason, Throwable cause) {
         super(status, reason, cause);
     }
 
@@ -54,7 +54,7 @@ public class SepsException extends ResponseStatusException {
      * @param cause         a nested exception (optional)
      * @since 5.3
      */
-    public SepsException(int rawStatusCode, String reason, Throwable cause) {
+    public PichinchaException(int rawStatusCode, String reason, Throwable cause) {
         super(rawStatusCode, reason, cause);
     }
 }

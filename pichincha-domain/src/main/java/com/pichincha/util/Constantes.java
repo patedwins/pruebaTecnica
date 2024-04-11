@@ -3,7 +3,7 @@ package com.pichincha.util;
 /**
  * Constantes.
  *
- * @author cfreire on 2022/08/23.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
 public final class Constantes {

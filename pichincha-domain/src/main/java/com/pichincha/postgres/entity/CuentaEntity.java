@@ -24,16 +24,16 @@ import java.util.Set;
  */
 @Entity
 @Data
-@Table(name = "base_catalogo", schema = "base")
-public class CatalogoEntity {
+@Table(name = "cuenta", schema = "pichincha")
+public class CuentaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_catalogo", nullable = false)
-    private Integer codCatalogo;
+    @Column(name = "id_cuenta", nullable = false)
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cod_catalogo_padre")
-    private CatalogoEntity codCatalogoPadre;
+    private CuentaEntity codCatalogoPadre;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_grupo_catalogo", nullable = false)
@@ -79,6 +79,6 @@ public class CatalogoEntity {
     private String txtDescripcion;
 
     @OneToMany(mappedBy = "codCatalogoPadre")
-    private Set<CatalogoEntity> baseCatalogos = new LinkedHashSet<>();
+    private Set<CuentaEntity> baseCatalogos = new LinkedHashSet<>();
 
 }

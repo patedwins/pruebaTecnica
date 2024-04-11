@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Base catálogo repository interfaz.
  *
- * @author cfreire on 2022/08/23.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
 public interface IBaseCatalogoRepository extends CrudRepository<CatalogoEntity, Integer> {

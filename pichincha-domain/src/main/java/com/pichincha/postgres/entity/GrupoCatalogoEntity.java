@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Grupo catalogo entity.
  *
- * @author cfreire on 2022/08/25.
+ * @author patedwins on 2024/12/04.
  * @version 1.0.0
  */
 @Entity

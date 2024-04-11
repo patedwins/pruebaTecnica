@@ -10,7 +10,7 @@ import java.util.Collection;
 /**
  * AuditDataUser.
  *
- * @author cfreire on 2022/09/08.
+ * @author patedwins on 2022/09/08.
  * @version 1.0.0
  */
 @Getter

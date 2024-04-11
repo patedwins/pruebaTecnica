@@ -3,7 +3,7 @@ package com.pichincha.api.service.enums;
 /**
  * Messages enumerator to error manage.
  *
- * @author cfreire on 2022/09/16.
+ * @author patedwins on 2022/09/16.
  * @version 1.0.0
  */
 public enum MessagesEnum {
