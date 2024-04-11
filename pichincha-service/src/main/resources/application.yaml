@@ -1,0 +1,13 @@
+server:
+  servlet:
+    contextPath: /pichincha
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  main:
+    allow-bean-definition-overriding: true
+jwt:
+  secret: f865b53623b121fd34ee5426c792e5c3

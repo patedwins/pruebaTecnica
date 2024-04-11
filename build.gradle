@@ -1,0 +1,30 @@
+buildscript {
+    //Script para aplicar las variables de url de repo y repos
+    apply from: "https://gitlab.seps.gob.ec/admincicd/development-scripts/-/raw/master/gradle-ext.gradle"
+
+    repositories repos
+
+    apply from: "${serverCodeUrl}projects.gradle"
+    apply from: "${serverCodeUrl}plugins.gradle"
+    apply from: "${serverCodeUrl}global.gradle"
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:${dependenciesManagementPluginVersion}"
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarqubeGradlePluginVersion}")
+        classpath("org.sonarsource.scanner.api:sonar-scanner-api:${sonarScannerApiPluginVersion}")
+    }
+}
+
+allprojects {
+    group = 'com.pichincha'
+    version = '1.0.0-SNAPSHOT'
+    repositories repos
+}
+
+
+subprojects {
+    apply from: "${serverCodeUrl}projects.gradle"
+    apply from: "${serverCodeUrl}sonarqube.gradle"
+    apply plugin: "io.spring.dependency-management"
+}

@@ -1,0 +1,53 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: ERROR
+    #ec.gob.seps.common: DEBUG
+    #org.hibernate.SQL: DEBUG
+    #org.hibernate.type.descriptor.sql: TRACE
+    #org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    #org.springframework.jdbc.core.StatementCreatorUtils: TRACE
+---
+spring:
+  datasource:
+    postgres:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: ENC(${seps.jdbc.url})
+      username: ENC(${seps.jdbc.user})
+      password: ENC(${seps.jdbc.password})
+      hikari:
+        minimumIdle: ${base.minimumidle:5}
+        connectionTimeout: ${base.timeout:60000}
+        idleTimeout: ${base.idletimeout:600000}
+        maxLifetime: ${base.maxlifetime:180000}
+        maximumPoolSize: ${base.maxpoolsize:300}
+        connectionTestQuery: SELECT 1
+    oracle:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: oracle.jdbc.OracleDriver
+      jdbc-url: ENC(${seps.jdbc.oracle.url})
+      username: ENC(${seps.jdbc.oracle.user})
+      password: ENC(${seps.jdbc.oracle.password})
+      hikari:
+        connectionTimeout: 60000
+        idleTimeout: 600000
+        maxLifetime: 1800000
+        maximumPoolSize: 20
+        connectionTestQuery: SELECT 1 FROM DUAL
+    jpa:
+      # database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+      hibernate:
+        ddl-auto: none
+      show-sql: true
+    jackson:
+      default-property-inclusion: non_null
+springdoc:
+  swagger-ui:
+    enabled: true #access path "http://localhost:8080/common-services/swagger-ui.html"
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    password: ${jasypt.encryptor.password}

@@ -1,0 +1,5 @@
+rootProject.name = 'pichincha'
+
+include 'pichincha-service'
+include 'pichincha-core'
+include 'pichincha-domain'
