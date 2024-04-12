@@ -137,29 +137,38 @@ public class CuentaService implements ICuentaService {
      */
     @Override
     public String crearCuentaCliente(CuentaClienteVo data) throws PichinchaException {
-        Optional<ClienteEntity> clienteOp = clienteRepository.findById(data.getIdCliente());
-        ClienteEntity cliente = new ClienteEntity();
-        if (!clienteOp.isPresent()) {
-            return "No se encontró el cliente";
-        } else {
-            cliente = clienteOp.get();
-        }
         Optional<EntidadEntity> entidadOp = entidadRepository.findById(data.getIdEntidad());
-        if (entidadOp.isPresent()) {
-            CuentaEntity newData = new CuentaEntity();
-            newData.setEntidad(entidadOp.get());
-            newData.setNumCuenta(data.getNumCuenta());
-            newData.setTipo(data.getTipo());
-            newData.setSaldoInicial(data.getSaldoInicial());
-            newData.setEstado(Boolean.TRUE);
-            cuentaRepository.save(newData);
-            CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
-            cuentaCliente.setCliente(cliente);
-            cuentaCliente.setCuenta(newData);
-            cuentaClienteRepository.save(cuentaCliente);
-            return null;
-        } else {
+        if (!entidadOp.isPresent()) {
             return "No se encontró la entidad para la cuenta";
+        } else {
+            Optional<ClienteEntity> clienteOp = clienteRepository.findById(data.getIdCliente());
+            ClienteEntity cliente = new ClienteEntity();
+            if (!clienteOp.isPresent()) {
+                return "No se encontró el cliente";
+            } else {
+                cliente = clienteOp.get();
+            }
+            CuentaEntity cuentaExistente = cuentaRepository.findByNumCuentaAndEntidad(data.getNumCuenta(), entidadOp.get());
+            if (cuentaExistente != null) {
+                CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
+                cuentaCliente.setCliente(cliente);
+                cuentaCliente.setCuenta(cuentaExistente);
+                cuentaClienteRepository.save(cuentaCliente);
+                return null;
+            } else {
+                CuentaEntity newData = new CuentaEntity();
+                newData.setEntidad(entidadOp.get());
+                newData.setNumCuenta(data.getNumCuenta());
+                newData.setTipo(data.getTipo());
+                newData.setSaldoInicial(data.getSaldoInicial());
+                newData.setEstado(Boolean.TRUE);
+                cuentaRepository.save(newData);
+                CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
+                cuentaCliente.setCliente(cliente);
+                cuentaCliente.setCuenta(newData);
+                cuentaClienteRepository.save(cuentaCliente);
+                return null;
+            }
         }
     }
 }

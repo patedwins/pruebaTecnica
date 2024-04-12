@@ -19,4 +19,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ICuentaRepository extends JpaRepository<CuentaEntity, Integer> {
 
+    /**
+     * Obtener cuenta por numero y entidad
+     *
+     * @param numCuenta
+     * @param entidad
+     * @return
+     */
+    CuentaEntity findByNumCuentaAndEntidad(String numCuenta, EntidadEntity entidad);
+
 }

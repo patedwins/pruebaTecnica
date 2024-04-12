@@ -128,9 +128,9 @@ public class CuentaController {
     }
 
     /**
-     * Delete Entidad.
+     * Crear cuenta y asignar cuenta cliente.
      *
-     * @return a @{@link CuentaEntity} string.
+     * @return a @{@link CuentaClienteVo} string.
      */
     @PostMapping(value = "nuevaCuentaCliente", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
