@@ -69,3 +69,6 @@ Para asegurarse de que el proyecto no presenta vulnerabilidades de código se de
 
 Si presenta violaciones de reglas PMD y Checkstyle deben ser corregidas hasta que la aplicación se construya de forma exitosa.
 Cada vez que se encuentran violaciones de reglas en el log de ejecución se presenta una url que les llevará al listado de reglas violadas.
+
+### Construir docker
+docker build --build-arg "USER_ARG=pato" --build-arg "PASSWORD_ARG=pato123" --build-arg "URL_ARG=jdbc:postgresql://172.19.240.1:5432/pruebabd" -t pato/appweb:pichincha .
