@@ -9,9 +9,10 @@ package com.pichincha.controller;
 
 import com.pichincha.api.service.IMovimientoService;
 import com.pichincha.api.service.exception.util.MensajeConstantes;
+import com.pichincha.vo.MovimientoFechasVo;
+import com.pichincha.vo.MovimientoRegistarVo;
 import com.pichincha.vo.MovimientoVo;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -77,7 +79,7 @@ public class MovimientoController {
      */
     @PostMapping(value = "crearMovimientosPorCuentaYCliente", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<Object> asiganarMovimiento(@RequestBody MovimientoVo movimiento
+    public ResponseEntity<Object> asiganarMovimiento(@RequestBody MovimientoRegistarVo movimiento
             , HttpServletRequest request) {
         try {
             String respons = movimientoService.generarMovimientoPorEntidad(movimiento);
@@ -88,6 +90,24 @@ public class MovimientoController {
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Error en generar movimiento: "
+                    + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Find all group catalogs.
+     *
+     * @return a @{@link MovimientoVo} list.
+     */
+    @GetMapping(value = "obtenerMovimientosPorFecha", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<Object> findAllMovimientoPorFecha(@NotNull @RequestParam("fecDesde") String fecDesde
+            , @NotNull @RequestParam("fecHasta") String fecHasta, HttpServletRequest request) {
+        try {
+            List<MovimientoFechasVo> responsList = movimientoService.obtenerMovimientoPorFecha(fecDesde, fecHasta);
+            return new ResponseEntity<>(responsList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error en obtener Movimientos Por Fecha: "
                     + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

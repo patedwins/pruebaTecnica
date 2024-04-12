@@ -8,9 +8,11 @@
 package com.pichincha.api.service;
 
 import com.pichincha.api.service.exception.PichinchaException;
-import com.pichincha.postgres.entity.EntidadEntity;
+import com.pichincha.vo.MovimientoFechasVo;
+import com.pichincha.vo.MovimientoRegistarVo;
 import com.pichincha.vo.MovimientoVo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +35,12 @@ public interface IMovimientoService {
      *
      * @return a @{@link MovimientoVo} list.
      */
-    String generarMovimientoPorEntidad(MovimientoVo movimiento) throws PichinchaException;
+    String generarMovimientoPorEntidad(MovimientoRegistarVo movimiento) throws PichinchaException;
 
-
+    /**
+     * Find all movimientos por entidad
+     *
+     * @return a @{@link MovimientoVo} list.
+     */
+    List<MovimientoFechasVo> obtenerMovimientoPorFecha(String fecDesde, String fecHasta) throws PichinchaException;
 }

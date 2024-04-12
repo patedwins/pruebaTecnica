@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,4 +28,10 @@ public interface IMovimientoRepository extends JpaRepository<MovimientoEntity, I
             " join fetch ccl.cliente cl join fetch cl.persona p " +
             "where ent.id = :idEntidad and cc.estado=:estado")
     List<MovimientoEntity> obtenerPorEntidad(@Param("idEntidad") Integer idEntidad, @Param("estado") Boolean estado);
+
+    @Query("select mov from MovimientoEntity mov " +
+            " join fetch mov.cuentaCliente ccl join fetch ccl.cuenta cc join fetch cc.entidad ent " +
+            " join fetch ccl.cliente cl join fetch cl.persona p " +
+            "where mov.fecMovimiento between :fecDesde and :fecHasta order by mov.fecMovimiento")
+    List<MovimientoEntity> obtenerPorFechas(@Param("fecDesde") Date fecDesde, @Param("fecHasta") Date fecHasta);
 }

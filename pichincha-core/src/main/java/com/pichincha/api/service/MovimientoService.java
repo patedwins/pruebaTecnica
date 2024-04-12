@@ -8,6 +8,7 @@
 package com.pichincha.api.service;
 
 import com.pichincha.api.service.exception.PichinchaException;
+import com.pichincha.api.service.exception.util.MensajeConstantes;
 import com.pichincha.postgres.entity.ClienteEntity;
 import com.pichincha.postgres.entity.CuentaClienteEntity;
 import com.pichincha.postgres.entity.CuentaEntity;
@@ -19,14 +20,21 @@ import com.pichincha.postgres.repository.ICuentaRepository;
 import com.pichincha.postgres.repository.IEntidadRepository;
 import com.pichincha.postgres.repository.IMovimientoRepository;
 import com.pichincha.util.Constantes;
+import com.pichincha.vo.MovimientoFechasVo;
+import com.pichincha.vo.MovimientoRegistarVo;
 import com.pichincha.vo.MovimientoVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -47,6 +55,8 @@ public class MovimientoService implements IMovimientoService {
     private transient IClienteRepository clienteRepository;
     @Autowired
     private transient ICuentaClienteRepository cuentaClienteRepository;
+
+    private static final DateFormat FORMATO = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ENGLISH);
 
     /**
      * Constructor
@@ -72,6 +82,7 @@ public class MovimientoService implements IMovimientoService {
             listMovimiento.stream().forEach(mov -> {
                 MovimientoVo movData = new MovimientoVo();
                 movData.setIdEntidad(idEntidad);
+                movData.setEntidad(mov.getCuentaCliente().getCuenta().getEntidad().getNombre());
                 movData.setId(mov.getId());
                 movData.setFecMovimiento(mov.getFecMovimiento());
                 movData.setIdCliente(mov.getCuentaCliente().getCliente().getId());
@@ -98,7 +109,7 @@ public class MovimientoService implements IMovimientoService {
      * @return a @{@link MovimientoVo} list.
      */
     @Override
-    public String generarMovimientoPorEntidad(MovimientoVo movimiento) throws PichinchaException {
+    public String generarMovimientoPorEntidad(MovimientoRegistarVo movimiento) throws PichinchaException {
         Optional<CuentaEntity> cuentaOp = cuentaRepository.findById(movimiento.getIdCuenta());
         Optional<ClienteEntity> clienteOp = clienteRepository.findById(movimiento.getIdCliente());
         if (!cuentaOp.isPresent()) {
@@ -130,5 +141,54 @@ public class MovimientoService implements IMovimientoService {
         movimientoRepository.save(newMovimiento);
         cuentaRepository.save(cuenta);
         return null;
+    }
+
+    /**
+     * Find all movimientos por entidad
+     *
+     * @param fecDesde
+     * @param fecHasta
+     * @return a @{@link MovimientoVo} list.
+     */
+    @Override
+    public List<MovimientoFechasVo> obtenerMovimientoPorFecha(String fecDesde, String fecHasta) throws PichinchaException {
+        List<MovimientoFechasVo> retorno = new ArrayList<>();
+        Date fechaDesde = new Date();
+        Date fechaHasta = new Date();
+        if (fecDesde == null || fecHasta == null) {
+            throw new PichinchaException(HttpStatus.BAD_REQUEST, MensajeConstantes.OBLIGATORIO_FECHAS);
+        } else {
+            fechaDesde = convertirStringToDate(fecDesde.concat(" 00:00:00"));
+            fechaHasta = convertirStringToDate(fecHasta.concat(" 23:59:59"));
+        }
+        List<MovimientoEntity> listMovimiento = movimientoRepository.obtenerPorFechas(fechaDesde, fechaHasta);
+        listMovimiento.stream().forEach(mov -> {
+            MovimientoFechasVo movData = new MovimientoFechasVo();
+            movData.setFecha(mov.getFecMovimiento());
+            movData.setCliente(mov.getCuentaCliente().getCliente().getPersona().getNombre());
+            movData.setNumeroCuenta(mov.getCuentaCliente().getCuenta().getNumCuenta());
+            movData.setTipo(mov.getCuentaCliente().getCuenta().getTipo());
+            movData.setSaldoInicial(mov.getCuentaCliente().getCuenta().getSaldoInicial());
+            movData.setMovimiento(mov.getValor());
+            movData.setSaldoDisponible(mov.getSaldoCuentaFecha());
+            movData.setEstado(mov.getCuentaCliente().getCuenta().getEstado());
+            retorno.add(movData);
+        });
+        return retorno;
+    }
+
+    /**
+     * Permite dar formato a la fecha
+     *
+     * @return fecha con formato
+     */
+    public Date convertirStringToDate(String fechaString) {
+        try {
+            synchronized (FORMATO) {
+                return FORMATO.parse(fechaString);
+            }
+        } catch (ParseException ex) {
+            throw new PichinchaException(HttpStatus.BAD_REQUEST, MensajeConstantes.FORMATO_FECHAS);
+        }
     }
 }

@@ -13,20 +13,11 @@ import java.util.Date;
  * @version 1.0.0
  */
 @Data
-public class MovimientoVo implements Serializable {
-    private Integer id;
-    private Integer idEntidad;
-    private String entidad;
+public class MovimientoRegistarVo implements Serializable {
     private Integer idCuenta;
     private Integer idCliente;
     private String cliente;
     private String numCuenta;
     private String tipoCuenta;
-    private BigDecimal saldoInicial;
-    private String tipoMovimiento;
     private BigDecimal valorMovimiento;
-    private BigDecimal saldoDisponibleCuenta;
-    private BigDecimal saldoDisponibleFechaCuenta;
-    private Date fecMovimiento;
-    private Boolean estadoCuenta;
 }
