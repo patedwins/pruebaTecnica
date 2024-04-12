@@ -59,18 +59,18 @@ public class ClienteService implements IClienteService {
      */
     @Override
     public String saveNewCliente(ClienteVo data) throws PichinchaException {
-        ClienteEntity newData = new ClienteEntity();
         Optional<PersonaEntity> personaOp = personaRepository.findById(data.getIdPersona());
-        if (personaOp.isPresent()) {
-            newData.setClienteid(data.getClienteId());
-            newData.setPersona(personaOp.get());
-            newData.setContrasena(data.getContrasena());
-            newData.setEstado(Boolean.TRUE);
-            clienteRepository.save(newData);
-            return null;
-        } else {
+        if (!personaOp.isPresent()) {
             return "No se encontró la persona para su creación";
         }
+        PersonaEntity persona = personaOp.get();
+        ClienteEntity newData = new ClienteEntity();
+        newData.setClienteid(data.getClienteId());
+        newData.setPersona(persona);
+        newData.setContrasena(data.getContrasena());
+        newData.setEstado(Boolean.TRUE);
+        clienteRepository.save(newData);
+        return null;
     }
 
     /**
@@ -82,14 +82,12 @@ public class ClienteService implements IClienteService {
     @Override
     public String updateCliente(ClienteVo data) throws PichinchaException {
         Optional<ClienteEntity> clienteOp = clienteRepository.findById(data.getId());
-        ClienteEntity newData = new ClienteEntity();
         if (!clienteOp.isPresent()) {
             return "No se encontró al cliente para su actualización";
-        } else {
-            newData = clienteOp.get();
         }
         Optional<PersonaEntity> personaOp = personaRepository.findById(data.getIdPersona());
         if (personaOp.isPresent()) {
+            ClienteEntity newData = clienteOp.get();
             newData.setClienteid(data.getClienteId());
             newData.setPersona(personaOp.get());
             newData.setContrasena(data.getContrasena());

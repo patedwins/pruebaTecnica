@@ -23,12 +23,26 @@ import java.util.List;
  */
 public interface IMovimientoRepository extends JpaRepository<MovimientoEntity, Integer> {
 
+    /**
+     * Obtener movimientos
+     *
+     * @param idEntidad
+     * @param estado
+     * @return
+     */
     @Query("select mov from MovimientoEntity mov " +
             " join fetch mov.cuentaCliente ccl join fetch ccl.cuenta cc join fetch cc.entidad ent " +
             " join fetch ccl.cliente cl join fetch cl.persona p " +
             "where ent.id = :idEntidad and cc.estado=:estado")
     List<MovimientoEntity> obtenerPorEntidad(@Param("idEntidad") Integer idEntidad, @Param("estado") Boolean estado);
 
+    /**
+     * Obtener movimientos
+     *
+     * @param fecDesde
+     * @param fecHasta
+     * @return
+     */
     @Query("select mov from MovimientoEntity mov " +
             " join fetch mov.cuentaCliente ccl join fetch ccl.cuenta cc join fetch cc.entidad ent " +
             " join fetch ccl.cliente cl join fetch cl.persona p " +

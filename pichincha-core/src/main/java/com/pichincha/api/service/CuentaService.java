@@ -68,9 +68,9 @@ public class CuentaService implements ICuentaService {
      */
     @Override
     public String saveNewCuenta(CuentaVo data) throws PichinchaException {
-        CuentaEntity newData = new CuentaEntity();
         Optional<EntidadEntity> entidadOp = entidadRepository.findById(data.getIdEntidad());
         if (entidadOp.isPresent()) {
+            CuentaEntity newData = new CuentaEntity();
             newData.setEntidad(entidadOp.get());
             newData.setNumCuenta(data.getNumCuenta());
             newData.setTipo(data.getTipo());
@@ -144,21 +144,16 @@ public class CuentaService implements ICuentaService {
             return "No se encontró la entidad para la cuenta";
         } else {
             Optional<ClienteEntity> clienteOp = clienteRepository.findById(data.getIdCliente());
-            ClienteEntity cliente = new ClienteEntity();
             if (!clienteOp.isPresent()) {
                 return "No se encontró el cliente";
-            } else {
-                cliente = clienteOp.get();
             }
             CuentaEntity cuentaExistente = cuentaRepository.findByNumCuentaAndEntidad(data.getNumCuenta(), entidadOp.get());
-            CuentaClienteEntity cuentaClienteExistente = cuentaClienteRepository.findByCuentaAndCliente(cuentaExistente, cliente);
-            if (cuentaExistente != null) {
-                if (cuentaClienteExistente == null) {
-                    CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
-                    cuentaCliente.setCliente(cliente);
-                    cuentaCliente.setCuenta(cuentaExistente);
-                    cuentaClienteRepository.save(cuentaCliente);
-                }
+            CuentaClienteEntity cuentaClienteExistente = cuentaClienteRepository.findByCuentaAndCliente(cuentaExistente, clienteOp.get());
+            if (cuentaExistente != null && cuentaClienteExistente == null) {
+                CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
+                cuentaCliente.setCliente(clienteOp.get());
+                cuentaCliente.setCuenta(cuentaExistente);
+                cuentaClienteRepository.save(cuentaCliente);
                 return null;
             } else {
                 CuentaEntity newData = new CuentaEntity();
@@ -170,7 +165,7 @@ public class CuentaService implements ICuentaService {
                 newData.setEstado(Boolean.TRUE);
                 cuentaRepository.save(newData);
                 CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
-                cuentaCliente.setCliente(cliente);
+                cuentaCliente.setCliente(clienteOp.get());
                 cuentaCliente.setCuenta(newData);
                 cuentaClienteRepository.save(cuentaCliente);
                 return null;

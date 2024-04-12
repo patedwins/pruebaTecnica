@@ -13,10 +13,12 @@ import java.math.BigDecimal;
  */
 @Data
 public class CuentaClienteVo implements Serializable {
-	private Integer idEntidad;
-	private Integer idCliente;
-	private String numCuenta;
-	private String tipo;
-	private BigDecimal saldoInicial;
-	private Boolean estado;
+    private static final long serialVersionUID = 1L;
+
+    private Integer idEntidad;
+    private Integer idCliente;
+    private String numCuenta;
+    private String tipo;
+    private BigDecimal saldoInicial;
+    private Boolean estado;
 }

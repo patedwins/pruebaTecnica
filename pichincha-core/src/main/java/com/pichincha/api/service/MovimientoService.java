@@ -111,10 +111,10 @@ public class MovimientoService implements IMovimientoService {
     @Override
     public String generarMovimientoPorEntidad(MovimientoRegistarVo movimiento) throws PichinchaException {
         Optional<CuentaEntity> cuentaOp = cuentaRepository.findById(movimiento.getIdCuenta());
-        Optional<ClienteEntity> clienteOp = clienteRepository.findById(movimiento.getIdCliente());
         if (!cuentaOp.isPresent()) {
             return "No se encontró la cuenta";
         }
+        Optional<ClienteEntity> clienteOp = clienteRepository.findById(movimiento.getIdCliente());
         if (!clienteOp.isPresent()) {
             return "No se encontró al cliente";
         }
@@ -152,16 +152,12 @@ public class MovimientoService implements IMovimientoService {
      */
     @Override
     public List<MovimientoFechasVo> obtenerMovimientoPorFecha(String fecDesde, String fecHasta) throws PichinchaException {
-        List<MovimientoFechasVo> retorno = new ArrayList<>();
-        Date fechaDesde = new Date();
-        Date fechaHasta = new Date();
         if (fecDesde == null || fecHasta == null) {
             throw new PichinchaException(HttpStatus.BAD_REQUEST, MensajeConstantes.OBLIGATORIO_FECHAS);
-        } else {
-            fechaDesde = convertirStringToDate(fecDesde.concat(" 00:00:00"));
-            fechaHasta = convertirStringToDate(fecHasta.concat(" 23:59:59"));
         }
-        List<MovimientoEntity> listMovimiento = movimientoRepository.obtenerPorFechas(fechaDesde, fechaHasta);
+        List<MovimientoEntity> listMovimiento = movimientoRepository.obtenerPorFechas(
+                convertirStringToDate(fecDesde.concat(" 00:00:00")), convertirStringToDate(fecHasta.concat(" 23:59:59")));
+        List<MovimientoFechasVo> retorno = new ArrayList<>();
         listMovimiento.stream().forEach(mov -> {
             MovimientoFechasVo movData = new MovimientoFechasVo();
             movData.setFecha(mov.getFecMovimiento());

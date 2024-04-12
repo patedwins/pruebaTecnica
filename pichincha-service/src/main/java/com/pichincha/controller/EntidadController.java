@@ -7,9 +7,9 @@
 
 package com.pichincha.controller;
 
+import com.pichincha.api.service.IEntidadService;
 import com.pichincha.api.service.exception.util.MensajeConstantes;
 import com.pichincha.postgres.entity.EntidadEntity;
-import com.pichincha.api.service.IEntidadService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

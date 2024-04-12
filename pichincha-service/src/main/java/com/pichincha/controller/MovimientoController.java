@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**

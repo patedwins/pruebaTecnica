@@ -80,7 +80,7 @@ public class CuentaController {
                 return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Error en una nueva dataa: "
+            return new ResponseEntity<>("Error en una nueva Cuenta: "
                     + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -101,7 +101,7 @@ public class CuentaController {
                 return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Error en una nueva dataa: "
+            return new ResponseEntity<>("Error en actualizar cuenta: "
                     + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -122,7 +122,7 @@ public class CuentaController {
                 return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Error en una nueva dataa: "
+            return new ResponseEntity<>("Error en un eliminar cuenta: "
                     + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -143,7 +143,7 @@ public class CuentaController {
                 return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Error en una nueva dataa: "
+            return new ResponseEntity<>("Error en una nueva cuenta cliente: "
                     + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

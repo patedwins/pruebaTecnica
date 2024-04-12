@@ -12,7 +12,6 @@ import com.pichincha.vo.MovimientoFechasVo;
 import com.pichincha.vo.MovimientoRegistarVo;
 import com.pichincha.vo.MovimientoVo;
 
-import java.util.Date;
 import java.util.List;
 
 /**

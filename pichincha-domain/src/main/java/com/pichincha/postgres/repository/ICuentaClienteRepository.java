@@ -10,7 +10,6 @@ package com.pichincha.postgres.repository;
 import com.pichincha.postgres.entity.ClienteEntity;
 import com.pichincha.postgres.entity.CuentaClienteEntity;
 import com.pichincha.postgres.entity.CuentaEntity;
-import com.pichincha.postgres.entity.EntidadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

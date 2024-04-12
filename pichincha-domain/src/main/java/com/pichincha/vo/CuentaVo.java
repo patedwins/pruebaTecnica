@@ -1,13 +1,9 @@
 package com.pichincha.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * JwtResponse.
@@ -17,10 +13,12 @@ import java.util.List;
  */
 @Data
 public class CuentaVo implements Serializable {
-	private Integer id;
-	private Integer idEntidad;
-	private String numCuenta;
-	private String tipo;
-	private BigDecimal saldoInicial;
-	private Boolean estado;
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
+    private Integer idEntidad;
+    private String numCuenta;
+    private String tipo;
+    private BigDecimal saldoInicial;
+    private Boolean estado;
 }

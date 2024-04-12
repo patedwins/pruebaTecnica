@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * MovimientoVo.
@@ -14,6 +13,8 @@ import java.util.Date;
  */
 @Data
 public class MovimientoRegistarVo implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Integer idCuenta;
     private Integer idCliente;
     private String cliente;

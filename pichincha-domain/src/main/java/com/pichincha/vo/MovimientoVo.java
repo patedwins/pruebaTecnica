@@ -14,6 +14,8 @@ import java.util.Date;
  */
 @Data
 public class MovimientoVo implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
     private Integer idEntidad;
     private String entidad;

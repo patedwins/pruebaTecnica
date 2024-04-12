@@ -9,7 +9,6 @@ package com.pichincha.api.service;
 
 import com.pichincha.api.service.exception.PichinchaException;
 import com.pichincha.postgres.entity.EntidadEntity;
-import com.pichincha.postgres.entity.PersonaEntity;
 import com.pichincha.postgres.repository.IEntidadRepository;
 import org.springframework.stereotype.Service;
 
