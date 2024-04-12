@@ -7,16 +7,25 @@
 
 package com.pichincha.controller;
 
-import com.pichincha.postgres.entity.EntidadEntity;
-import com.pichincha.api.service.IEntidadService;
+import com.pichincha.api.service.IMovimientoService;
+import com.pichincha.api.service.exception.util.MensajeConstantes;
+import com.pichincha.vo.MovimientoVo;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import oracle.jdbc.proxy.annotation.Post;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -31,26 +40,55 @@ import java.util.List;
 @SecurityRequirement(name = "Bearer")
 public class MovimientoController {
 
-    private final transient IEntidadService entidadService;
+    private final transient IMovimientoService movimientoService;
 
     /**
      * Controller
      *
-     * @param entidadService
+     * @param movimientoService
      */
 
-    public MovimientoController(IEntidadService entidadService) {
-        this.entidadService = entidadService;
+    public MovimientoController(IMovimientoService movimientoService) {
+        this.movimientoService = movimientoService;
     }
 
     /**
      * Find all group catalogs.
      *
-     * @return a @{@link EntidadEntity} list.
+     * @return a @{@link MovimientoVo} list.
      */
-    @GetMapping(value = "obtenerListaCuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "obtenerMovimientosPorEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<EntidadEntity> findAll() {
-        return entidadService.findAll();
+    public ResponseEntity<Object> findAllMovimiento(@NotNull @RequestParam("idEntidad") Integer idEntidad
+            , HttpServletRequest request) {
+        try {
+            List<MovimientoVo> responsList = movimientoService.obtenerMovimientoPorEntidad(idEntidad);
+            return new ResponseEntity<>(responsList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error en una nueva persona: "
+                    + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Find all group catalogs.
+     *
+     * @return a @{@link MovimientoVo} list.
+     */
+    @PostMapping(value = "crearMovimientosPorCuentaYCliente", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<Object> asiganarMovimiento(@RequestBody MovimientoVo movimiento
+            , HttpServletRequest request) {
+        try {
+            String respons = movimientoService.generarMovimientoPorEntidad(movimiento);
+            if (respons == null) {
+                return new ResponseEntity<>(MensajeConstantes.SAVE_UPDATE, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error en generar movimiento: "
+                    + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -9,6 +9,10 @@ package com.pichincha.postgres.repository;
 
 import com.pichincha.postgres.entity.MovimientoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 /**
  * Repository interfaz.
@@ -18,4 +22,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IMovimientoRepository extends JpaRepository<MovimientoEntity, Integer> {
 
+    @Query("select mov from MovimientoEntity mov " +
+            " join fetch mov.cuentaCliente ccl join fetch ccl.cuenta cc join fetch cc.entidad ent " +
+            " join fetch ccl.cliente cl join fetch cl.persona p " +
+            "where ent.id = :idEntidad and cc.estado=:estado")
+    List<MovimientoEntity> obtenerPorEntidad(@Param("idEntidad") Integer idEntidad, @Param("estado") Boolean estado);
 }

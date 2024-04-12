@@ -41,6 +41,9 @@ public class CuentaEntity {
     @Column(name = "saldo_inicial")
     private BigDecimal saldoInicial;
 
+    @Column(name = "saldo_disponible")
+    private BigDecimal saldoDisponible;
+
     @Column(name = "estado")
     private Boolean estado;
 }

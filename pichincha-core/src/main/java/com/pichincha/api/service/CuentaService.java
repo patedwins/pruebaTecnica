@@ -75,6 +75,7 @@ public class CuentaService implements ICuentaService {
             newData.setNumCuenta(data.getNumCuenta());
             newData.setTipo(data.getTipo());
             newData.setSaldoInicial(data.getSaldoInicial());
+            newData.setSaldoDisponible(data.getSaldoInicial());
             newData.setEstado(Boolean.TRUE);
             cuentaRepository.save(newData);
             return null;
@@ -100,6 +101,7 @@ public class CuentaService implements ICuentaService {
                 newData.setNumCuenta(data.getNumCuenta());
                 newData.setTipo(data.getTipo());
                 newData.setSaldoInicial(data.getSaldoInicial());
+                newData.setSaldoDisponible(data.getSaldoInicial());
                 newData.setEstado(Boolean.TRUE);
                 cuentaRepository.save(newData);
                 return null;
@@ -149,11 +151,14 @@ public class CuentaService implements ICuentaService {
                 cliente = clienteOp.get();
             }
             CuentaEntity cuentaExistente = cuentaRepository.findByNumCuentaAndEntidad(data.getNumCuenta(), entidadOp.get());
+            CuentaClienteEntity cuentaClienteExistente = cuentaClienteRepository.findByCuentaAndCliente(cuentaExistente, cliente);
             if (cuentaExistente != null) {
-                CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
-                cuentaCliente.setCliente(cliente);
-                cuentaCliente.setCuenta(cuentaExistente);
-                cuentaClienteRepository.save(cuentaCliente);
+                if (cuentaClienteExistente == null) {
+                    CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();
+                    cuentaCliente.setCliente(cliente);
+                    cuentaCliente.setCuenta(cuentaExistente);
+                    cuentaClienteRepository.save(cuentaCliente);
+                }
                 return null;
             } else {
                 CuentaEntity newData = new CuentaEntity();
@@ -161,6 +166,7 @@ public class CuentaService implements ICuentaService {
                 newData.setNumCuenta(data.getNumCuenta());
                 newData.setTipo(data.getTipo());
                 newData.setSaldoInicial(data.getSaldoInicial());
+                newData.setSaldoDisponible(data.getSaldoInicial());
                 newData.setEstado(Boolean.TRUE);
                 cuentaRepository.save(newData);
                 CuentaClienteEntity cuentaCliente = new CuentaClienteEntity();

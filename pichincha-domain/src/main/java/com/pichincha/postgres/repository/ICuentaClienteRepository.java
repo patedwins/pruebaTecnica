@@ -7,7 +7,10 @@
 
 package com.pichincha.postgres.repository;
 
+import com.pichincha.postgres.entity.ClienteEntity;
 import com.pichincha.postgres.entity.CuentaClienteEntity;
+import com.pichincha.postgres.entity.CuentaEntity;
+import com.pichincha.postgres.entity.EntidadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -17,5 +20,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  */
 public interface ICuentaClienteRepository extends JpaRepository<CuentaClienteEntity, Integer> {
+
+    /**
+     * Obtener cuenta cliente por cuenta y cliente
+     *
+     * @param cuenta
+     * @param cliente
+     * @return
+     */
+    CuentaClienteEntity findByCuentaAndCliente(CuentaEntity cuenta, ClienteEntity cliente);
 
 }

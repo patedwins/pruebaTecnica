@@ -47,4 +47,7 @@ public class MovimientoEntity {
 
     @Column(name = "valor")
     private BigDecimal valor;
+
+    @Column(name = "saldo_fecha_cuenta")
+    private BigDecimal saldoCuentaFecha;
 }

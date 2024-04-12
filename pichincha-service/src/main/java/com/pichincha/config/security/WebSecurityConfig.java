@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements S
                 .authorizeRequests()
                 .antMatchers("/authenticate", "/actuator/**", "/transaccion/**",
                         "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/cuenta/**",
-                        "/entidad/**").permitAll()
+                        "/entidad/**", "/movimiento/**").permitAll()
 
                 // Se debe agregar aqui el path de aquellos servicios que se desea que sean públicos.
                 // Ejemplo:

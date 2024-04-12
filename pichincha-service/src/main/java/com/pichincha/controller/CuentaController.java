@@ -69,9 +69,9 @@ public class CuentaController {
      *
      * @return a @{@link CuentaEntity} string.
      */
-    @PostMapping(value = "nuevaEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "nuevaCuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> newEntity(@RequestBody CuentaVo data, HttpServletRequest request) {
+    public ResponseEntity<String> newCuenta(@RequestBody CuentaVo data, HttpServletRequest request) {
         try {
             String respons = cuentaService.saveNewCuenta(data);
             if (respons == null) {
@@ -90,9 +90,9 @@ public class CuentaController {
      *
      * @return a @{@link CuentaEntity} string.
      */
-    @PutMapping(value = "actualizarEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "actualizarCuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> updateEntidad(@RequestBody CuentaVo data, HttpServletRequest request) {
+    public ResponseEntity<String> updateCuenta(@RequestBody CuentaVo data, HttpServletRequest request) {
         try {
             String respons = cuentaService.updateCuenta(data);
             if (respons == null) {
@@ -111,9 +111,9 @@ public class CuentaController {
      *
      * @return a @{@link CuentaEntity} string.
      */
-    @DeleteMapping(value = "eliminarEntidad", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @DeleteMapping(value = "eliminarCuenta", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> deleteEntidad(@RequestBody CuentaVo data, HttpServletRequest request) {
+    public ResponseEntity<String> deleteCuenta(@RequestBody CuentaVo data, HttpServletRequest request) {
         try {
             String respons = cuentaService.deleteCuenta(data);
             if (respons == null) {
