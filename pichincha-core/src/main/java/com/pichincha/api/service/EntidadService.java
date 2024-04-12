@@ -57,7 +57,7 @@ public class EntidadService implements IEntidadService {
         EntidadEntity newData = new EntidadEntity();
         newData.setNombre(data.getNombre());
         newData.setEstado(Boolean.TRUE);
-        entidadRepository.save(data);
+        entidadRepository.save(newData);
         return null;
     }
 

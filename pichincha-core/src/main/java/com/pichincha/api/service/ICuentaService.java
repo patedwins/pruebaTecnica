@@ -10,6 +10,7 @@ package com.pichincha.api.service;
 import com.pichincha.api.service.exception.PichinchaException;
 import com.pichincha.postgres.entity.CuentaEntity;
 import com.pichincha.postgres.entity.EntidadEntity;
+import com.pichincha.vo.CuentaClienteVo;
 import com.pichincha.vo.CuentaVo;
 
 import java.util.List;
@@ -49,4 +50,11 @@ public interface ICuentaService {
      * @return a @{@link String} list.
      */
     String deleteCuenta(CuentaVo data) throws PichinchaException;
+
+    /**
+     * Delete a persona
+     *
+     * @return a @{@link String} list.
+     */
+    String crearCuentaCliente(CuentaClienteVo data) throws PichinchaException;
 }

@@ -10,6 +10,7 @@ package com.pichincha.controller;
 import com.pichincha.api.service.ICuentaService;
 import com.pichincha.api.service.exception.util.MensajeConstantes;
 import com.pichincha.postgres.entity.CuentaEntity;
+import com.pichincha.vo.CuentaClienteVo;
 import com.pichincha.vo.CuentaVo;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
@@ -117,6 +118,27 @@ public class CuentaController {
             String respons = cuentaService.deleteCuenta(data);
             if (respons == null) {
                 return new ResponseEntity<>(MensajeConstantes.DELETE, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error en una nueva dataa: "
+                    + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Delete Entidad.
+     *
+     * @return a @{@link CuentaEntity} string.
+     */
+    @PostMapping(value = "nuevaCuentaCliente", produces = {MimeTypeUtils.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<String> crearCuentaCliente(@RequestBody CuentaClienteVo data, HttpServletRequest request) {
+        try {
+            String respons = cuentaService.crearCuentaCliente(data);
+            if (respons == null) {
+                return new ResponseEntity<>(MensajeConstantes.SAVE_NEW, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(respons, HttpStatus.BAD_REQUEST);
             }
