@@ -1,0 +1,9 @@
+curl --location 'http://localhost:8080/pichincha/cuenta/nuevaCuentaCliente' \
+--header 'Content-Type: application/json' \
+--data '{
+  "idEntidad": 1,
+  "idCliente": 1,
+  "numCuenta": "CA-0098",
+  "tipo": "AHORROS",
+  "saldoInicial": 12000
+}'

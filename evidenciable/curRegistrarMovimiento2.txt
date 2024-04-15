@@ -1,0 +1,10 @@
+curl --location 'http://localhost:8080/pichincha/movimiento/crearMovimientosPorCuentaYCliente' \
+--header 'Content-Type: application/json' \
+--data '{
+  "idCuenta": 1,
+  "idCliente": 3,
+  "cliente": "Juan Osorio",
+  "numCuenta": "478758",
+  "tipoCuenta": "Ahorro",
+  "valorMovimiento": 345.00
+}'
