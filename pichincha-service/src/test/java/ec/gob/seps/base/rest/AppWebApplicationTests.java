@@ -1,10 +1,16 @@
 package ec.gob.seps.base.rest;
 
-//@SpringBootTest
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
 class AppWebApplicationTests {
 
-  /*  @Test
-    void contextLoads() {
-    }*/
+
+    @Test
+    public void contextLoads() {
+        CuentaJpaTest cuentaTest = new CuentaJpaTest();
+        cuentaTest.testConsultaBaseDeDatos();
+    }
 
 }
