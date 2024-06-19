@@ -80,22 +80,24 @@ public class MovimientoService implements IMovimientoService {
         if (entidad.isPresent()) {
             List<MovimientoEntity> listMovimiento = movimientoRepository.obtenerPorEntidad(entidad.get().getId(), Boolean.TRUE);
             listMovimiento.stream().forEach(mov -> {
-                MovimientoVo movData = new MovimientoVo();
-                movData.setIdEntidad(idEntidad);
-                movData.setEntidad(mov.getCuentaCliente().getCuenta().getEntidad().getNombre());
-                movData.setId(mov.getId());
-                movData.setFecMovimiento(mov.getFecMovimiento());
-                movData.setIdCliente(mov.getCuentaCliente().getCliente().getId());
-                movData.setCliente(mov.getCuentaCliente().getCliente().getPersona().getNombre());
-                movData.setIdCuenta(mov.getCuentaCliente().getCuenta().getId());
-                movData.setNumCuenta(mov.getCuentaCliente().getCuenta().getNumCuenta());
-                movData.setTipoCuenta(mov.getCuentaCliente().getCuenta().getTipo());
-                movData.setTipoMovimiento(mov.getDescripcion());
-                movData.setSaldoInicial(mov.getCuentaCliente().getCuenta().getSaldoInicial());
-                movData.setValorMovimiento(mov.getValor());
-                movData.setSaldoDisponibleCuenta(mov.getCuentaCliente().getCuenta().getSaldoDisponible());
-                movData.setSaldoDisponibleFechaCuenta(mov.getSaldoCuentaFecha());
-                movData.setEstadoCuenta(mov.getCuentaCliente().getCuenta().getEstado());
+                MovimientoVo movData = MovimientoVo.builder()
+                        .idEntidad(idEntidad)
+                        .idCuenta(mov.getCuentaCliente().getCuenta().getId())
+                        .entidad(mov.getCuentaCliente().getCuenta().getEntidad().getNombre())
+                        .id(mov.getId())
+                        .fecMovimiento(mov.getFecMovimiento())
+                        .idCliente(mov.getCuentaCliente().getCliente().getId())
+                        .cliente(mov.getCuentaCliente().getCliente().getPersona().getNombre())
+                        .idCuenta(mov.getCuentaCliente().getCuenta().getId())
+                        .numCuenta(mov.getCuentaCliente().getCuenta().getNumCuenta())
+                        .tipoCuenta(mov.getCuentaCliente().getCuenta().getTipo())
+                        .tipoMovimiento(mov.getDescripcion())
+                        .saldoInicial(mov.getCuentaCliente().getCuenta().getSaldoInicial())
+                        .valorMovimiento(mov.getValor())
+                        .saldoDisponibleCuenta(mov.getCuentaCliente().getCuenta().getSaldoDisponible())
+                        .saldoDisponibleFechaCuenta(mov.getSaldoCuentaFecha())
+                        .estadoCuenta(mov.getCuentaCliente().getCuenta().getEstado())
+                        .build();
                 retorno.add(movData);
             });
         }
@@ -159,15 +161,16 @@ public class MovimientoService implements IMovimientoService {
                 convertirStringToDate(fecDesde.concat(" 00:00:00")), convertirStringToDate(fecHasta.concat(" 23:59:59")));
         List<MovimientoFechasVo> retorno = new ArrayList<>();
         listMovimiento.stream().forEach(mov -> {
-            MovimientoFechasVo movData = new MovimientoFechasVo();
-            movData.setFecha(mov.getFecMovimiento());
-            movData.setCliente(mov.getCuentaCliente().getCliente().getPersona().getNombre());
-            movData.setNumeroCuenta(mov.getCuentaCliente().getCuenta().getNumCuenta());
-            movData.setTipo(mov.getCuentaCliente().getCuenta().getTipo());
-            movData.setSaldoInicial(mov.getCuentaCliente().getCuenta().getSaldoInicial());
-            movData.setMovimiento(mov.getValor());
-            movData.setSaldoDisponible(mov.getSaldoCuentaFecha());
-            movData.setEstado(mov.getCuentaCliente().getCuenta().getEstado());
+            MovimientoFechasVo movData = new MovimientoFechasVo().toBuilder()
+                    .fecha(mov.getFecMovimiento())
+                    .cliente(mov.getCuentaCliente().getCliente().getPersona().getNombre())
+                    .numeroCuenta(mov.getCuentaCliente().getCuenta().getNumCuenta())
+                    .tipo(mov.getCuentaCliente().getCuenta().getTipo())
+                    .saldoInicial(mov.getCuentaCliente().getCuenta().getSaldoInicial())
+                    .movimiento(mov.getValor())
+                    .saldoDisponible(mov.getSaldoCuentaFecha())
+                    .estado(mov.getCuentaCliente().getCuenta().getEstado())
+                    .build();
             retorno.add(movData);
         });
         return retorno;
